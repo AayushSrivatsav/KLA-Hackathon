@@ -2,10 +2,10 @@
 import math
 import sys
 
-sys.setrecursionlimit(20000)
+sys.setrecursionlimit(200000)
 #open the input file
 inp= open("C:\HackathonKLA\KLA-Hackathon\Milestone2\Input\Testcase4.txt",'r')
-out= open("milestone2output4check.txt",'w')
+out= open("milestone2output4.txt",'w')
 
 #read the input content into a dictionary
 lines=inp.readlines()
@@ -44,12 +44,14 @@ initial_point=(0,0)
 wafer_diameter=input_dict["WaferDiameter"]
 wafer_radius=wafer_diameter/2
 
-
-ref_die_point=[x_ref,y_ref]   #center of reference die
+ref_die_point=[x_ref,y_ref] 
+#if (x_shift>x_die and y_shift>y_die):
+#    ref_die_point=[x_ref - x_shift,y_ref - y_shift]   #center of reference die
 start_point=[ref_die_point[0]-(x_die/2),ref_die_point[1]-(y_die/2)]
-if (x_shift>x_die and y_shift>y_die):
-    start_point = [ref_die_point[0] - x_shift - (x_die/2), ref_die_point[1] -y_shift - (y_die/2)]
+#if (x_shift>x_die and y_shift>y_die):
+ #   start_point = [ref_die_point[0] + x_shift - (x_die/2), ref_die_point[1] + y_shift - (y_die/2)]
 
+#IMPLEMENTING BFS
 visited=[]
 
 def die_num(x_curr,y_curr,x_pos,y_pos):
@@ -59,8 +61,6 @@ def die_num(x_curr,y_curr,x_pos,y_pos):
     right_dist=math.dist([0,0],[x_curr+x_die,y_curr])
     top_dist=math.dist([0,0],[x_curr,y_curr+y_die])
     top_right_dist=math.dist([0,0],[x_curr+x_die,y_curr+y_die])
-
-
 
     if left_dist<wafer_radius or right_dist<wafer_radius or top_dist<wafer_radius or top_right_dist<wafer_radius:
 
